@@ -30,7 +30,8 @@ public class RootDetectionBypass implements IXposedHookLoadPackage {
             * /system/bin/failsafe/su
             * /data/local/su */
             // Check if can execute su
-            findAndHookMethod("au.com.nab.coreSdk.device.DeviceRootUtils", lpparam.classLoader, "isRooted", returnConstant(false));     // Check 1
+            findAndHookMethod("au.com.nab.coreSdk.device.DeviceRootUtils", lpparam.classLoader, "isRooted", returnConstant(false));                     // Check 1
+            findAndHookMethod("au.com.nab.coreSdk.device.DeviceRootUtils", lpparam.classLoader, "numberOfRootChecksTriggered", returnConstant(0));      // Check 1
 
             // Check for the following files
             /*
