@@ -45,6 +45,9 @@ public class RootDetectionBypass implements IXposedHookLoadPackage {
             * /data/local/su */
             findAndHookMethod("com.ca.a.au", lpparam.classLoader, "c", returnConstant(false));                                          // Check 2
 
+            // Yet to solve what it checks
+            findAndHookMethod("com.visa.cbp.sdk.v2x.storage.database.ˏ", lpparam.classLoader, "ˏ", returnConstant(false));              // Check 3
+
             Log.d(TAG, "Bypassed " + TAG + "'s root detection!");
         }
     }
