@@ -8,6 +8,7 @@ package fi.razerman.nabrootbypasser;
 import android.util.Log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 import static de.robv.android.xposed.XC_MethodReplacement.returnConstant;
 
@@ -47,6 +48,14 @@ public class RootDetectionBypass implements IXposedHookLoadPackage {
 
             // Yet to solve what it checks
             findAndHookMethod("com.visa.cbp.sdk.v2x.storage.database.ˏ", lpparam.classLoader, "ˏ", returnConstant(false));              // Check 3
+
+            // Experimental
+            findAndHookMethod("com.visa.cbp.sdk.v2x.crypto.ˏ", lpparam.classLoader, "ˎ", String.class, new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            param.setResult(null);
+                        }
+                    });
 
             Log.d(TAG, "Bypassed " + TAG + "'s root detection!");
         }
